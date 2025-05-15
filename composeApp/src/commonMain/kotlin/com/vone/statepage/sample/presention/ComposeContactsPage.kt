@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -34,6 +33,7 @@ import com.vone.statepage.sample.Greeting
 import com.vone.statepage.sample.data.SampleUserInfo
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
+import org.koin.compose.koinInject
 import statepagesample.composeapp.generated.resources.Res
 import statepagesample.composeapp.generated.resources.ic_refresh
 
@@ -59,7 +59,7 @@ fun ContactListItem(contact: SampleUserInfo) {
 @Composable
 fun ComposeContactsPage(
     id: String = "0", // 添加ID参数，默认值为"0"
-    modifier: Modifier = Modifier, viewModel: SealedListStateViewModel = viewModel()
+    modifier: Modifier = Modifier, viewModel: SealedListStateViewModel = koinInject<SealedListStateViewModel>()
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
